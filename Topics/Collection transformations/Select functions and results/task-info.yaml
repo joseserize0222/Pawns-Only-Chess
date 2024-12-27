@@ -1,0 +1,30 @@
+type: matching
+captions:
+  - unzip()
+  - zip()
+  - associateBy()
+  - associate()
+  - associateWith()
+options:
+  - "Returns two collection from a List of Pairs: the first one will have the first\
+  \ elements of the pair, the second one – the second elements."
+  - Returns a map where the elements are the keys. The map values ​​are obtained via
+    a transformation function.
+  - Returns a list of values built from the elements of a collection and another collection
+    with the same index.
+  - Returns a map that contains key-value pairs that correspond to the map entry via
+    a lambda function.
+  - Returns a map where the elements of a collection are the values.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/23997#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4

@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Runtime error
+  - text: "Compile-time error: \"Type mismatch\""
+  - text: "It will print \"Kitty\", but not \"Harry Potter\""
+  - text: "OK: It will print \"Kitty\" and \"Harry Potter\""
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/16939#comment
+status: Solved
+record: -1
+local_check: false

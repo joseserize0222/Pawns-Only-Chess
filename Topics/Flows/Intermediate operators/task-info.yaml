@@ -1,0 +1,18 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: An operator that transforms an upstream flow into a downstream one by transforming
+      the emitted values
+  - text: An operator that can be applied between two flows to join them together into
+      one
+  - text: An operator providing intermediate storage for all values emitted by a flow
+      before they are consumed
+  - text: An operator that can be applied between two values emitted by a flow
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/24436#comment
+status: Solved
+record: -1
+local_check: false

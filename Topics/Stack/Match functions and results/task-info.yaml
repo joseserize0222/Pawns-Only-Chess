@@ -1,0 +1,28 @@
+type: matching
+captions:
+  - push()
+  - empty()
+  - pop()
+  - search()
+  - peek()
+options:
+  - Removes the object at the top of this stack and returns that object
+  - Retrieves or fetches the first/top element of the stack without removing it from
+    the stack
+  - "Returns true if nothing is on the top of the stack, else, it will return false"
+  - "Returns the position of the element from the top of the stack, else it will return\
+  \ -1"
+  - Places the element at the top of the stack
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/25255#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4

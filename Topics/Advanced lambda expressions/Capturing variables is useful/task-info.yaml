@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Implementing a loop to iterate over a collection and perform operations on
+      its elements.
+  - text: Defining a callback function that updates the user interface based on an asynchronous
+      operation's result.
+  - text: Writing a function that performs mathematical calculations.
+  - text: Handling exception cases within a try-catch block.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/30440#comment
+status: Solved
+record: -1
+local_check: false

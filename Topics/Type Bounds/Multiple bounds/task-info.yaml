@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: "fun &lt;T extends Type1 &amp; Type2 &gt; doubleTypesTry(list: List&lt;T&gt;)\
+    \ { }"
+  - text: "fun &lt;Type1, Type2&gt; doubleTypesTry(list: List&lt;T&gt;) { }"
+  - text: "fun &lt;T&gt; doubleTypesTry(list: List&lt;Type1, Type2&gt;) { }"
+  - text: "fun &lt;T&gt; doubleTypesTry(list: List&lt;T&gt;) where T:  Type1, T : Type2\
+    \ { }"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/16938#comment
+status: Solved
+record: -1
+local_check: false

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PawnsOnlyChessTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-09-09T00:29:18" hostname="Serizes-MacBook-Pro.local" time="0.064">
+  <properties/>
+  <testcase name="start" classname="PawnsOnlyChessTest" time="0.064"/>
+  <system-out><![CDATA[?[1;31m
+Start test 1?[0m
+Pawns-Only Chess
+  +---+---+---+---+---+---+---+---+
+8 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+7 | B | B | B | B | B | B | B | B |
+  +---+---+---+---+---+---+---+---+
+6 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+5 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+4 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+3 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+2 | W | W | W | W | W | W | W | W |
+  +---+---+---+---+---+---+---+---+
+1 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+    a   b   c   d   e   f   g   h  
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

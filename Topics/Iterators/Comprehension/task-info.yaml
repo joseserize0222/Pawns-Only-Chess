@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: previousIndex()
+  - text: removeAtIndex()
+  - text: next()
+  - text: sort()
+  - text: previous()
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/20797#comment
+status: Solved
+record: -1
+local_check: false

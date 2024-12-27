@@ -1,0 +1,28 @@
+type: table
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/23479#comment
+status: Solved
+record: -1
+rows:
+  - let
+  - with
+  - run
+  - also
+  - apply
+columns:
+  - "Return value: context object"
+  - "Return value: lambda result"
+selected:
+  - - false
+    - false
+  - - false
+    - false
+  - - false
+    - false
+  - - false
+    - false
+  - - false
+    - false

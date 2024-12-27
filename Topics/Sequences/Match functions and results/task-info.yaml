@@ -1,0 +1,27 @@
+type: matching
+captions:
+  - generateSequence()
+  - sequenceOf()
+  - yieldAll()
+  - yield()
+  - asSequence()
+options:
+  - Returns one element and suspends the execution
+  - Receives the first value (seed) and a function to apply to that value and construct
+    a infinite sequence
+  - Converts any collection into a sequence
+  - Obtains a sequence from the elements passed as arguments
+  - Returns a collection and suspend de execution
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/26317#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4

@@ -1,0 +1,50 @@
+content:
+  - String formatting
+  - Regexps
+  - CharSequence
+  - StringBuilder
+  - StringBuffer
+  - Mutable Map and Mutable Set as interfaces
+  - Null and collections
+  - Commonly Used Regex
+  - Collections as interface
+  - Iterators
+  - Comparable and Comparator
+  - Regexps in use
+  - For loop and iterables
+  - ArrayDeque
+  - Stack
+  - Sequences
+  - Test predicates  checking elements in collection
+  - Ordering elements in collection
+  - Custom sort order for collection
+  - Grouping collections
+  - Aggregate operations on collections
+  - Mapping transformation
+  - Fold and reduce on collections
+  - Collection transformations
+  - Flows
+  - Advanced lambda expressions
+  - Retrieve collection parts
+  - Retrieve single element
+  - Aggregate operations on collections  part 2
+  - The Math library
+  - Catching supertype
+  - Creating custom exceptions
+  - Scope functions  summary
+  - Inline functions and reified types in Kotlin
+  - Type-safe builders
+  - Generic builder
+  - Currying
+  - Introduction to generic programming
+  - Generics and Any
+  - Type aliases
+  - Generic functions
+  - Type Bounds
+  - BigInteger
+  - BigDecimal
+  - Thread synchronization
+  - Debugging techniques
+  - Standard logging for JVM
+  - MockK
+  - Local date and time

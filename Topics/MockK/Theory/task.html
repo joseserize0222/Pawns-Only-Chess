@@ -1,0 +1,188 @@
+<div class="step-text">
+<p>MockK is a powerful mocking library designed for the Kotlin language. It offers a simple and intuitive way to create and manage <a class="theory-lookup not-relevant" href="/learn/step/27614" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a mock object is a simulated object that is used in place of a real dependency, such as an external service or a database access, in order to create an isolated test environment. | Mock objects can be created using the mockk library and can be used to control the behavior of these dependencies, making test results more predictable. By specifying the return value of a method or property of the mock object, developers can focus on testing specific parts of their code without worrying about external factors that may affect the test result.">mock objects</a> for testing purposes. With MockK, developers can create test doubles, define their behaviors, and verify interactions with them. MockK also supports the latest features of Kotlin, including coroutines and <a class="theory-lookup not-relevant" href="/learn/step/27614" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an extension function is a function that can be called on an existing class as if it were a member of that class, but is actually defined outside of the class. | It allows developers to add new functionality to existing classes without modifying the original class code. Extension functions take the receiver object (the class they are extending) as the first argument, which is implicitly passed. They can take arguments and return values like regular functions. If a class has both a member function and an extension function with the same name and signature, the member function will take precedence.">extension functions</a>.</p>
+<h5 id="unit-testing-and-mockk">Unit testing and MockK</h5>
+<p><a class="theory-lookup not-relevant" href="/learn/step/27614" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, unit testing is the practice of writing and executing tests to verify if the methods of a class are working as expected, without relying on external dependencies such as databases or web services. | This process is facilitated by the JUnit framework, which recognizes methods annotated with `@Test` as unit test methods. These methods should have clear and descriptive names that indicate the purpose of the test and the expected outcome. When dealing with dependencies in unit testing, a technique called mocking is used to simulate these dependencies and create isolated tests. This allows developers to control the behavior of these dependencies and focus on testing specific parts of their code without worrying about external factors that may affect the test result.">Unit testing</a> is a critical part of software development. It helps developers ensure that their code works as expected and catches bugs early in the development cycle. One of the challenges in unit testing is dealing with dependencies, such as external services or a database access. Mocking is a technique used to simulate these dependencies and create isolated tests.</p>
+<p>By using mock objects instead of real dependencies, developers can control the behavior of these dependencies and make their tests more predictable. This allows them to focus on testing specific parts of their code without worrying about external factors that may affect the test results.</p>
+<p>MockK offers several benefits for developers writing unit tests in Kotlin:</p>
+<ul>
+<li>It is designed specifically for Kotlin, so it supports the language's features and idioms.</li>
+<li>It provides a simple and intuitive API for creating and managing mock objects.</li>
+<li>It supports coroutines and extension functions, which are essential for modern Kotlin development.</li>
+<li>It is actively maintained and updated, with a growing community of users and contributors.</li>
+</ul>
+<p>While there are several mocking libraries available for Kotlin, MockK stands out for its simplicity and ease of use. Other popular mocking libraries, such as Mockito and JMockit, require more boilerplate code and can be more challenging to set up. MockK, on the other hand, offers a more concise and natural API that is easier to learn and use.</p>
+<p>Additionally, MockK offers unique features, such as support for coroutines and extension functions, which may not be available in other libraries. Ultimately, the choice of a mocking library will depend on the specific needs of the project and the preferences of the development team.</p>
+<p>To get started with MockK, you can simply add it as a dependency to your Kotlin project.</p>
+<pre><code class="language-kotlin">&lt;dependency&gt;
+     &lt;groupId&gt;io.mockk&lt;/groupId&gt;
+     &lt;artifactId&gt;mockk-jvm&lt;/artifactId&gt;
+     &lt;version&gt;1.13.4&lt;/version&gt;
+     &lt;scope&gt;test&lt;/scope&gt;
+ &lt;/dependency&gt;</code></pre>
+<p>For a Gradle project, add the following:</p>
+<pre><code class="language-kotlin">testImplementation "io.mockk:mockk:1.13.4"</code></pre>
+<p></p>
+<div class="alert alert-primary">You can find the current version <a href="https://central.sonatype.com/search?q=mockk" rel="noopener noreferrer nofollow" target="_blank">here</a>. </div>
+<p>Next, you need to import the MockK library in your test class:</p>
+<pre><code class="language-kotlin">import io.mockk.*</code></pre>
+<h5 id="defining-the-behavior-of-mock-objects">Defining the behavior of mock objects</h5>
+<p>Before defining the behavior of a mock object, we must first create one. In MockK, this is done using the <code class="language-kotlin">mockk()</code> function. For example, to create a mock object of a <code class="language-kotlin">Calculator</code> class, we can use the following code:</p>
+<pre><code class="language-kotlin">val calculatorMock = mockk&lt;Calculator&gt;()</code></pre>
+<p>Once we have created a mock object, we can define its behavior using the <code class="language-kotlin">every {}</code> function. This function allows us to specify the <a class="theory-lookup not-relevant" href="/learn/step/27614" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a return value is the result produced by a function after it has completed its execution. | It is determined by the last expression in the function's body, which must be an expression-style statement. If a function has a specified return type, it indicates that the function will not return a value under any circumstance, such as when it throws an exception or enters an infinite loop. Understanding return values is important for writing clean, readable, and robust code in Kotlin.">return value</a> of a method or property of the mock object. For example, to stub the <code class="language-kotlin">add()</code> method of our <code class="language-kotlin">Calculator</code> mock object to always return 5, we can use the following code:</p>
+<pre><code class="language-kotlin">every { calculatorMock.add(any(), any()) } returns 5</code></pre>
+<p>Here, we use the <code class="language-kotlin">any()</code> function to specify that the <code class="language-kotlin">add()</code> method can take any two arguments. We then use the <code class="language-kotlin">returns</code> keyword to specify that the method should always return 5.</p>
+<p>In addition to stubbing the behavior of a mock object, we can also verify that it has been used correctly. This is done using the <code class="language-kotlin">verify {}</code> function. For example, to verify that the <code class="language-kotlin">add()</code> method of our <code class="language-kotlin">Calculator</code> mock object has been called with the arguments 2 and 3, we can use the following code:</p>
+<pre><code class="language-kotlin">verify { calculatorMock.add(2, 3) }</code></pre>
+<p>In some cases, we may need to mock a void method, which does not return a value. This can be done using the <code class="language-kotlin">just runs</code> syntax. For example, to mock a <code class="language-kotlin">log()</code> method of a <code class="language-kotlin">Logger</code> class that does not return a value, we can use the following code:</p>
+<pre><code class="language-kotlin">val loggerMock = mockk&lt;Logger&gt;()
+justRun { loggerMock.log(any()) }</code></pre>
+<p>Here, we use the <code class="language-kotlin">justRun()</code> function to specify that the <code class="language-kotlin">log()</code> method should not return a value.</p>
+<p>In some cases, we may need to mock a final class, which is not possible with some other mocking frameworks. MockK provides a solution to this problem by using byte-code generation to create a proxy for the final class. For example, to mock a final class <code class="language-kotlin">MyFinalClass</code>, we can use the following code:</p>
+<pre><code class="language-kotlin">mockkObject(MyFinalClass::class)</code></pre>
+<p>Defining the behavior of mock objects is an important aspect of software testing. With the MockK framework for Kotlin, this task becomes easy and straightforward. By creating mock objects with the <code class="language-kotlin">mockk()</code> function, stubbing methods with the <code class="language-kotlin">every {}</code> function, verifying interactions with the <code class="language-kotlin">verify {}</code> function, mocking void methods with the <code class="language-kotlin">justRun()</code> function, and mocking final classes with the <code class="language-kotlin">mockkObject()</code> function, we can ensure that our tests are reliable and accurate.</p>
+<h5 id="mockk-framework-basic-example">MockK framework: basic example</h5>
+<p>Let's say we have a simple interface called <code class="language-kotlin">Calculator</code> with two methods: <code class="language-kotlin">add()</code> and <code class="language-kotlin">subtract()</code>.</p>
+<pre><code class="language-kotlin">interface Calculator {
+    fun add(x: Int, y: Int): Int
+    fun subtract(x: Int, y: Int): Int
+}
+
+class CalculatorService(private val calculator: Calculator) {
+    fun addAndSubtract(x: Int, y: Int): Int {
+        val sum = calculator.add(x, y)
+        val difference = calculator.subtract(x, y)
+        return sum - difference
+    }
+}
+
+</code></pre>
+<p>We want to test a class called <code class="language-kotlin">CalculatorService</code> that uses this interface, but we don't want to use the actual <code class="language-kotlin">Calculator</code> implementation for our test. Instead, we want to create a mock <code class="language-kotlin">Calculator</code> object using MockK.</p>
+<p>We can create our mock <code class="language-kotlin">Calculator</code> object and define its behavior using MockK. Here's an example:</p>
+<pre><code class="language-kotlin">@Test
+fun testingMockCalculator() {
+    val mockCalculator = mockk&lt;Calculator&gt;()
+
+    every { mockCalculator.add(2, 3) } returns 5
+    every { mockCalculator.subtract(2, 3) } returns -1
+
+    val calculatorService = CalculatorService(mockCalculator)
+    val result = calculatorService.addAndSubtract(2, 3)
+
+    assert(result == 6)
+}</code></pre>
+<p>In this example, we create a mock <code class="language-kotlin">Calculator</code> object using the <code class="language-kotlin">mockk()</code> function. We then use the <code class="language-kotlin">every()</code> function to define the behavior of the <code class="language-kotlin">add()</code> and <code class="language-kotlin">subtract()</code> methods when called with the arguments <code class="language-kotlin">2</code> and <code class="language-kotlin">3</code>. Finally, we create an instance of <code class="language-kotlin">CalculatorService</code> using our mock <code class="language-kotlin">Calculator</code>, call the <code class="language-kotlin">addAndSubtract()</code> method with the arguments <code class="language-kotlin">2</code> and <code class="language-kotlin">3</code>, and assert that the result is <code class="language-kotlin">6</code>.</p>
+<p>This is just a simple example, but it demonstrates the basic usage of the MockK framework in Kotlin. We can use MockK to easily create mock objects and define their behavior, which allows us to test our code in isolation without relying on real implementations of our dependencies.</p>
+<h5 id="mockk-framework-annotation-example">MockK framework: annotation example</h5>
+<p>We have a simple class called <code class="language-kotlin">Calculator</code>, which performs basic <a class="theory-lookup not-relevant" href="/learn/step/27614" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, arithmetic operations are mathematical calculations performed on numerical values using specific operators. | There are five arithmetic operators in Kotlin: addition (+), subtraction (-), multiplication (\*), division (/), and modulo (%). These operators are binary, meaning they take two operands, which are the values or variables the operator is being applied to. For example, in the expression 1 + 3, 1 and 3 are the operands, and + is the operator. Arithmetic operations in Kotlin follow specific rules, such as multiplication having a higher priority than addition or subtraction. Parentheses can be used to specify the order of execution and simplify notation. Additionally, Kotlin supports compound assignment operations that combine arithmetic operations and assignment, such as assignment after addition (a += b) and assignment after subtraction (a -= b).">arithmetic operations</a>. We want to write some tests to verify that it's functioning correctly, but we need to mock the dependencies it relies on. In this case, let's say <code class="language-kotlin">Calculator</code> relies on a <code class="language-kotlin">MathService</code> to perform its calculations.</p>
+<p>Here's how we can use annotations to create a mock <code class="language-kotlin">MathService</code> and inject it into our <code class="language-kotlin">Calculator</code> instance for testing:</p>
+<pre><code class="language-kotlin">class CalculatorTest {
+
+    // Create a mock MathService using the @MockK annotation
+    @MockK
+    lateinit var mathService: MathService
+
+    // Create an instance of Calculator, injecting the mock MathService with the @InjectMockK annotation
+    @InjectMockK
+    lateinit var calculator: Calculator
+
+    // Set up the mock behavior for the MathService using the MockK API
+    @Before
+    fun setUp() {
+        MockKAnnotations.init(this)
+        every { mathService.add(any(), any()) } returns 5
+    }
+
+    // Test that our Calculator instance is correctly using the mocked MathService
+    @Test
+    fun `test add method`() {
+        val result = calculator.add(2, 3)
+        assertEquals(5, result)
+    }
+}
+</code></pre>
+<p>In this example, we use the <code class="language-kotlin">@MockK</code> annotation to create a mock <code class="language-kotlin">MathService</code> <a class="theory-lookup not-relevant" href="/learn/step/27614" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an instance refers to an object or an instance of a class that is created during runtime. | It is a subtype of every known type in Kotlin, meaning it can represent a value of any type in terms of type checking. This is particularly useful in situations where a function demands a return type, but it is impossible to return a value, such as when calculating a percentage if the value is zero. In such cases, a function that returns `Instance` can be used. The concept of instance is also related to threading, where only one thread can execute code in a synchronized method of a particular instance. This means that different threads can execute methods of different objects at the same time, a concept that can be summarized as one thread per instance.">instance</a>. We also use the <code class="language-kotlin">@InjectMockK</code> annotation to create an instance of <code class="language-kotlin">Calculator</code> and automatically inject our mock <code class="language-kotlin">MathService</code> into it.</p>
+<p>In the <code class="language-kotlin">setUp()</code> method, we use the MockK API to set up the mock behavior for our <code class="language-kotlin">mathService</code> instance. We specify that the <code class="language-kotlin">add()</code> method should return <code class="language-kotlin">5</code> for any input arguments.</p>
+<p>Finally, in our <a class="theory-lookup not-relevant" href="/learn/step/27614" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a test method is a function inside a test class that is annotated with the `@Test` annotation. | This annotation indicates to the JUnit framework that the method is a unit test method. Test functions should have clear and descriptive names that make it easy to understand their purpose and identify the source of a failure or bug when running multiple tests. A common naming convention is `methodName_input_expectedBehavior`, which clearly communicates the purpose of the test, including the method being tested, the input or condition the method is being called with, and the expected outcome. JUnit provides a variety of methods for testing different conditions. For example, you can test if the arguments are equal, if a value is null, if the argument is an instance of a certain class, if the argument is not null, or if the argument throws a certain exception. These methods have overloads that accept a message of the type `String`, which is displayed if the test fails. JUnit also provides a convenient tool for writing effective and concise tests called parameterized tests. Instead of multiple test methods, you can have a single method denoted by `@ParameterizedTest`, which takes parameters so that you can supply different arguments to it. This allows you to reuse your code efficiently and improve the readability of your tests. JUnit has many options to set up argument sources for your tests, including `@ValueSource`, `@NullSource`, `@EmptySource`, and `@CsvSource`, among others.">test method</a>, we use the <code class="language-kotlin">calculator</code> instance to call the <code class="language-kotlin">add()</code> method and verify that it correctly returns <code class="language-kotlin">5</code>.</p>
+<p>By using annotations to create and inject mock objects, we can simplify our test setup and focus on verifying the behavior of our code under test.</p>
+<h5 id="spying">Spying</h5>
+<p>The MockK framework in Kotlin provides a feature called "spying", which allows developers to create a spy object that can track the interactions between the object and the methods. A spy object can be created by using the <code class="language-kotlin">spy()</code> function, which takes an instance of an object to be spied upon.</p>
+<p>Here's an example of using a spy object in the MockK framework:</p>
+<pre><code class="language-kotlin">class Example {
+    fun method1(): String {
+        return "method1"
+    }
+
+    fun method2(): String {
+        return "method2"
+    }
+}
+
+val example = spy(Example())
+
+every { example.method1() } returns "spy1"
+
+assertEquals("spy1", example.method1()) // Returns "spy1"
+
+assertEquals("method2", example.method2()) // Returns "method2"
+</code></pre>
+<p>In this example, we first create an instance of the <code class="language-kotlin">Example</code> class and pass it to the <code class="language-kotlin">spy()</code> function to create a spy object. We then use the <code class="language-kotlin">every()</code> function to specify the behavior of the <code class="language-kotlin">method1()</code> function when called on the spy object.</p>
+<p>When we call the <code class="language-kotlin">method1()</code> function on the spy object, it returns "spy1" instead of the original return value "method1". However, when we call the <code class="language-kotlin">method2()</code> function on the spy object, it returns the original value "method2", as we didn't specify any behavior for this method.</p>
+<p>Using a spy object is particularly useful when we want to test a method that has dependencies on other methods. By spying on the dependencies, we can ensure that they are being called correctly by the method under test. Additionally, we can use the spy object to verify that certain methods were called a certain number of times, with specific arguments, or in a specific order.</p>
+<p>Overall, the spy feature in the MockK framework provides a powerful tool for testing complex interactions between methods and dependencies in Kotlin applications.</p>
+<h5 id="object-mocking">Object mocking</h5>
+<p>In the MockK framework for Kotlin, the <code class="language-kotlin">mockkObject</code> function is used to mock an entire object. This means that all functions and properties of the object will be replaced with mock implementations.</p>
+<p>Here's an example:</p>
+<pre><code class="language-kotlin">object MyObject {
+    fun myFunction() {
+        // ...
+    }
+
+    val myProperty: String = "Hello, world!"
+}
+
+// Mock the entire MyObject
+val mockedObject = mockkObject(MyObject::class)
+
+// Set up behavior for the mocked function
+every { mockedObject.myFunction() } returns Unit
+
+// Use the mocked object
+mockedObject.myFunction() // Does not execute real function
+println(mockedObject.myProperty) // "Hello, world!"
+</code></pre>
+<p>In this example, we first define an object <code class="language-kotlin">MyObject</code> with a function <code class="language-kotlin">myFunction</code> and a property <code class="language-kotlin">myProperty</code>. We then use the <code class="language-kotlin">mockkObject</code> function to create a mock of the entire <code class="language-kotlin">MyObject</code>.</p>
+<p>We then set up behavior for the <code class="language-kotlin">myFunction</code> function using the <code class="language-kotlin">every</code> function and the <code class="language-kotlin">returns</code> keyword. This tells the mock that whenever <code class="language-kotlin">myFunction</code> is called, it should return <code class="language-kotlin">Unit</code> (i.e., do nothing).</p>
+<p>Finally, we use the mocked object by calling <code class="language-kotlin">myFunction</code> and accessing the <code class="language-kotlin">myProperty</code> property. In both cases, the mock behavior we defined is used instead of the real function or property.</p>
+<p>One thing to note is that when using <code class="language-kotlin">mockkObject</code>, all functions and properties of the object are replaced with mock implementations. This means that if you have other code that uses the real <code class="language-kotlin">MyObject</code> (e.g., if <code class="language-kotlin">MyObject</code> is a singleton used throughout your codebase), that code will also be affected by the mock. If you only want to mock a specific function or property of an object, you should use the <code class="language-kotlin">mockk</code> function instead.</p>
+<h5 id="using-argument-matchers-in-mockk">Using argument matchers in MockK</h5>
+<p><a class="theory-lookup not-relevant" href="/learn/step/27614" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an argument matcher is a feature provided by the MockK framework used in unit testing to match specific values, any value, null value, range of values, and collections when creating and managing mock objects. | It offers various functions to match specific values, such as `eq()` for exact value matching and `match()` for value matching using a custom matcher function. For instance, to match a string with the value foo, you can use `eq(foo)`. To match any value of a certain type, you can use `any()`. To match null value, you can use `nullable()`.">Argument matchers</a> can be used to match specific values, any value, null values, ranges of values, and collections. In MockK, argument matchers are created using a set of functions that are specifically designed for matching different types of values.</p>
+<p>1) Matching specific values</p>
+<p>MockK provides several functions for matching specific values, including <code class="language-kotlin">eq()</code>, which is used to match an exact value, and <code class="language-kotlin">match()</code>, which is used to match a value using a custom matcher function. For example, to match a string with the value "foo", we can use the <code class="language-kotlin">eq()</code> function like this:</p>
+<pre><code class="language-kotlin">every { myMockObject.myMethod(eq("foo")) } returns 42</code></pre>
+<p>2) Matching any value</p>
+<p>To match any value of a certain type, we can use the <code class="language-kotlin">any()</code> function. For example, to match any string value, we can use the <code class="language-kotlin">any()</code> function like this:</p>
+<pre><code class="language-kotlin">every { myMockObject.myMethod(any()) } returns 42
+</code></pre>
+<p>3) Matching null values</p>
+<p>To match null values, we can use the <code class="language-kotlin">isNull()</code> function. For example, to match a null string value, we can use the <code class="language-kotlin">isNull()</code> function like this:</p>
+<pre><code class="language-kotlin">every { myMockObject.myMethod(isNull&lt;String&gt;()) } returns 42
+</code></pre>
+<p>4) Matching ranges of values</p>
+<p>MockK provides several functions for matching ranges of values, including <code class="language-kotlin">less()</code>, <code class="language-kotlin">lessEq()</code>, <code class="language-kotlin">greater()</code>, <code class="language-kotlin">greaterEq()</code>, and <code class="language-kotlin">range()</code>. For example, to match an integer value between 10 and 20, we can use the <code class="language-kotlin">range()</code> function like this:</p>
+<pre><code class="language-kotlin">every { myMockObject.myMethod(range(10, 20)) } returns 42
+</code></pre>
+<p>5) Matching collections</p>
+<p>To match collections, we can use the <code class="language-kotlin">match()</code> function with a custom matcher function that checks the contents of the collection. For example, to match a list of strings that contains the values "foo" and "bar", we can use the <code class="language-kotlin">match()</code> function like this:</p>
+<pre><code class="language-kotlin">every { myMockObject.myMethod(match { it.contains("foo") &amp;&amp; it.contains("bar") }) } returns 42
+</code></pre>
+<p>MockK provides several commonly used argument matchers that can be used in Kotlin unit tests. These include:</p>
+<ul>
+<li>eq(). The <code class="language-kotlin">eq()</code> function is used to match an exact value. It can be used to match any type of value, including primitive types and objects.</li>
+<li>any(). The <code class="language-kotlin">any()</code> function is used to match any value of a certain type. It can be used to match any type of value, including primitive types and objects.</li>
+<li>captor(). The <code class="language-kotlin">captor()</code> function is used to capture the value of an argument that is passed to a mocked method. This can be useful for testing methods that have side effects or for verifying that certain values were passed to a method.</li>
+<li>slot(). The <code class="language-kotlin">slot()</code> function is similar to the <code class="language-kotlin">captor()</code> function, but it captures the value of an argument into a slot object. This can be useful for testing methods that return values or for verifying that certain values were passed to a method.</li>
+<li>argThat(). The <code class="language-kotlin">argThat()</code> function is used to match an argument using a custom matcher function. This can be useful for testing methods that have complex argument requirements or for verifying that certain values were passed.</li>
+</ul>
+<h5 id="conclusion">Conclusion</h5>
+<p>MockK is a powerful mocking framework that provides developers with a simple, intuitive API for creating and managing mock objects in Kotlin. Its built-in support for Kotlin's features and concise <a class="theory-lookup not-relevant" href="/learn/step/27614" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a syntax refers to the set of rules and conventions that dictate how a program should be written in the language. | It includes the structure of statements, expressions, and keywords, as well as the use of indentation, whitespace, and comments. An expression, for example, is a type of syntax that evaluates to a single value, such as a literal value, variable, function call, or a combination of these elements using operators. Understanding the syntax of Kotlin is essential for writing clear, maintainable, and error-free code.">syntax</a> make it a popular choice among Kotlin developers, while its flexibility and configurability make it suitable for a wide range of testing scenarios.</p>
+</div>

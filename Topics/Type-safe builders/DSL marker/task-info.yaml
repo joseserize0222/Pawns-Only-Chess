@@ -1,0 +1,23 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: It is a signal to the compiler to improve the execution time
+  - text: It is a mandatory signal to the compiler to prevent the use of functions or
+      builders without the DSL scope
+  - text: It is a signal to the compiler to prepare the bytecode to access in a more
+      effective and efficient way
+  - text: It is a signal to the compiler and other developers that functions or builders
+      are to be used only within a specific DSL scope
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/29652#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Thu, 07 Nov 2024 00:40:16 UTC"
+record: -1
+selected_options:
+  - 3
+local_check: false

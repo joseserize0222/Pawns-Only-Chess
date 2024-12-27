@@ -1,0 +1,27 @@
+type: matching
+captions:
+  - addAll()
+  - removeLast()
+  - addFirst()
+  - remove()
+  - first()
+options:
+  - Removes a single instance of the specified element from the collection and returns
+    true
+  - Returns the first element or throws NoSuchElementException if the deque is empty
+  - Prepends the specified element to the collection
+  - Adds all elements (collection) to the end and returns true
+  - Removes the last element from the deque and returns that removed element
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/25038#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4

@@ -1,0 +1,22 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: It's a simulated object automatically created by a testing framework.
+  - text: It's an empty object of the required class added to a test to make it compile.
+  - text: It's a simulated object that imitates the behavior of a real object in controlled
+      ways.
+  - text: It's an instance of a real object when used in a testing environment.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/27617#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Fri, 27 Dec 2024 13:35:48 UTC"
+record: -1
+selected_options:
+  - 2
+custom_name: What is a mock?
+local_check: false

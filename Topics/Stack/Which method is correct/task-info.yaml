@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: push() and pop()
+  - text: first() and last()
+  - text: addLast() and removeFirst()
+  - text: get(0) and get(size-1)
+  - text: first() and removeLast()
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/25258#comment
+status: Solved
+record: -1
+custom_name: Which method is correct?
+local_check: false

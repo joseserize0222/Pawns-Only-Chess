@@ -1,0 +1,16 @@
+type: sorting
+options:
+  - "open class CorrectNumberException: RuntimeException()"
+  - "class NumberBelowRange: NumberOutOfRange()"
+  - "open class NumberOutOfRange: CorrectNumberException()"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/15036#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2

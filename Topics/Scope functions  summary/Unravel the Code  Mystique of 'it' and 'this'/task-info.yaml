@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: apply uses &#x27;this&#x27;
+  - text: with uses &#x27;it&#x27;
+  - text: run uses &#x27;this&#x27;
+  - text: let uses &#x27;it&#x27;
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/47466#comment
+status: Solved
+record: -1
+custom_name: "Unravel the Code: Mystique of 'it' and 'this'"
+local_check: false

@@ -1,0 +1,125 @@
+<div class="step-text">
+<p>Kotlin is a programming language that provides a lot of powerful features to make code concise and expressive. One of these features is inline functions – a technique to improve the performance of higher-order functions. In this topic, we'll explore the concept of inline functions, their benefits, and their use in Kotlin.</p>
+<h5 id="what-are-inline-functions">What are inline functions?</h5>
+<p>An inline function is a function that is expanded at the call site instead of being executed as a separate function call. In other words, the body of an inline function is copied and pasted directly into the calling code, just like a <a href="https://www.geeksforgeeks.org/macros-and-its-types-in-c-cpp/" rel="noopener noreferrer nofollow" target="_blank">macro in C/C++</a> or a <a href="https://www.geeksforgeeks.org/templates-cpp/" rel="noopener noreferrer nofollow" target="_blank">template in C++</a>.</p>
+<p>By default, all functions in Kotlin are non-inline, meaning that they are executed as separate function calls. However, when we mark a function as <code class="language-kotlin">inline</code>, the compiler replaces the function call with the function's body. This reduces the overhead of the function call as well as the creation of unnecessary objects.</p>
+<p>To mark a function as inline, we use the <code class="language-kotlin">inline</code> keyword before the function declaration. Here's the syntax:</p>
+<pre><code class="language-kotlin">inline fun functionName(parameters): returnType {
+    // function body
+}</code></pre>
+<p>Let's look at an example and figure out what is happening:</p>
+<pre><code class="language-kotlin">inline fun measureTimeMillis(block: () -&gt; Unit): Long {
+    val startTime = System.currentTimeMillis()
+    block()
+    return System.currentTimeMillis() - startTime
+}
+
+fun main() {
+    val time = measureTimeMillis {
+        // do some time-consuming operation
+        Thread.sleep(1000)
+    }
+    println("Time taken: $time milliseconds")
+}
+</code></pre>
+<p>In this example, we define an <code class="language-kotlin">inline</code> function called <code class="language-kotlin">measureTimeMillis</code> that takes a lambda expression as a parameter. The lambda expression is expected to perform some time-consuming operation, which we want to measure. Inside the <code class="language-kotlin">measureTimeMillis</code> function, we first record the start time using <code class="language-kotlin">System.currentTimeMillis()</code>, then call the lambda expression, and finally subtract the start time from the current time to get the total time taken.</p>
+<p>By marking the <code class="language-kotlin">measureTimeMillis</code> function as <code class="language-kotlin">inline</code>, the Kotlin compiler will replace any calls to this function with the actual code inside the function body at compile time. This means that there will be no function call overhead at runtime, which can be beneficial for performance-critical code.</p>
+<p>In the <code class="language-kotlin">main</code> function, we call the <code class="language-kotlin">measureTimeMillis</code> function and, using <code class="language-kotlin">Thread.sleep(1000)</code>, pass a lambda expression that sleeps for one second. The time taken for this operation is returned by <code class="language-kotlin">measureTimeMillis</code> and stored in the <code class="language-kotlin">time</code> variable, which is then printed to the console.</p>
+<p>In Kotlin, functions are stored in memory in the same way as any other object. When a function is defined in code, it is compiled into bytecode and can then be loaded into memory during program execution.</p>
+<p>When the function is called, its code is loaded into memory, and the processor begins to execute this code. Like other objects, functions are stored in the heap, a memory area allocated for storing objects during program execution. When you create a function in a heap, enough memory is allocated to store it, including the function code and any variables or objects needed to run it.</p>
+<p>It is important to understand that each time a function is called, a new instance of the function is created in memory. This means that if a function is called repeatedly, many instances of that function will be created in memory.</p>
+<p>Take a look at the code below:</p>
+<pre><code class="language-kotlin">fun main() {
+
+    val width = 10
+    val height = 20
+    println(calculateAreaWithoutInline(width, height))
+    println(calculateAreaWithoutInline(width, height))
+    println(calculateAreaWithoutInline(width, height))
+    println(calculateAreaWithoutInline(width, height))
+    println(calculateAreaWithoutInline(width, height))
+
+    println(calculateAreaWithInline(width, height))
+    println(calculateAreaWithInline(width, height))
+    println(calculateAreaWithInline(width, height))
+    println(calculateAreaWithInline(width, height))
+    println(calculateAreaWithInline(width, height))
+}
+
+fun calculateAreaWithoutInline(width: Int, height: Int): Int {
+    return width * height
+}
+
+inline fun calculateAreaWithInline(width: Int, height: Int): Int = width * height</code></pre>
+<p>Now let's consider how the compiler sees this code:</p>
+<pre><code class="language-kotlin">fun main() {
+
+    val width = 10
+    val height = 20
+    println(calculateAreaWithoutInline(width, height)) // A new function object will be created here
+    println(calculateAreaWithoutInline(width, height)) // and here
+    println(calculateAreaWithoutInline(width, height)) // and here
+    println(calculateAreaWithoutInline(width, height)) // and here
+    println(calculateAreaWithoutInline(width, height)) // and here
+
+    println(width * height) // The compiler copies its body to the place where the function is called
+    println(width * height) // without creating a new function object
+    println(width * height) // also here
+    println(width * height) // also here
+    println(width * height) // also here
+}
+
+fun calculateAreaWithoutInline(width: Int, height: Int): Int {
+    return width * height
+}
+
+inline fun calculateAreaWithInline(width: Int, height: Int): Int = width * height</code></pre>
+<p>Overall, inline functions can be a powerful tool in Kotlin for optimizing performance-critical code by eliminating function call overhead. However, they should be used with care, as inlining too much code can lead to an increased binary size and longer compile time.</p>
+<h5 id="benefits-of-inline-functions">Benefits of inline functions</h5>
+<p>The main benefits of inline functions are:</p>
+<ul>
+<li>Improved performance: since the code of an inline function is inserted directly into the calling code, there is no need to create an additional function object, which reduces the overhead of function calls.</li>
+<li>Reduction of memory usage: the inline function avoids the creation of a function object and its closure object, which leads to a smaller memory footprint.</li>
+<li>Higher-order function optimization: inlining functions allows us to use higher-order functions without the overhead of function calls, which makes the code faster and more efficient.</li>
+</ul>
+<h5 id="when-do-we-use-inline-functions">When do we use inline functions?</h5>
+<p>Inline functions are helpful when we need to use higher-order functions, such as lambda expressions, and when we want to avoid the overhead of function calls. Inline functions should be used in the following scenarios:</p>
+<ul>
+<li>
+<p>Functions that are used as arguments to other functions: inlining a function that is used as an argument to another function will eliminate the overhead of function calls and improve the performance of the code.</p>
+</li>
+<li>
+<p>Functions that are used frequently: if a function is called frequently, marking it as <code class="language-kotlin">inline</code> can significantly improve the performance of the code by reducing the overhead of function calls.</p>
+</li>
+<li>
+<p>Functions that return lambda expressions: if a function returns a lambda expression, marking it as <code class="language-kotlin">inline</code> can help reduce the overhead of function calls when the lambda expression is called.</p>
+</li>
+<li>
+<p>Small functions: inlining small functions can help reduce the overhead of function calls and improve the performance of the code.</p>
+</li>
+</ul>
+<p>Inline functions also have some limitations, which we need to keep in mind:</p>
+<ul>
+<li>
+<p>Code duplication: inlining functions can lead to code duplication, which can increase the size of the compiled code.</p>
+</li>
+<li>
+<p>Large functions: inlining large functions can lead to an increase in code size, as the entire function body is copied and pasted into the calling code.</p>
+</li>
+<li>
+<p>Recursive functions: inline functions cannot be recursive, as inlining a recursive function can lead to an infinite loop.</p>
+</li>
+</ul>
+<h5 id="reified-type-parameters">Reified type parameters</h5>
+<p>In the body of a universal function, you cannot access type <code class="language-kotlin">T</code> because it is available only at compile time but is erased at runtime. So, if you want to use a generic type as a regular class in the body of a function, you need to explicitly pass the class as a parameter, like this:</p>
+<pre><code class="language-kotlin">fun &lt;T&gt; myFun(c: Class&lt;T&gt;)</code></pre>
+<p>Reified type parameters are another feature of Kotlin that can be used in conjunction with inline functions to provide additional type information at runtime. Here's how we can use it:</p>
+<pre><code class="language-kotlin">inline fun &lt;reified T&gt; myFun()</code></pre>
+<p><code class="language-kotlin">reified</code> is a keyword in Kotlin that is used to mark a type parameter as being available at runtime. In other words, reified type parameters are those that are not erased by the compiler but, instead, retain their type information at runtime. By marking a type parameter as <code class="language-kotlin">reified</code>, it is possible to use it as a regular class object, with all its type information available at runtime. To use reified type parameters in an inline function, the type parameter must be marked with the <code class="language-kotlin">reified</code> keyword. Here is an example of an inline function that uses a reified type parameter:</p>
+<pre><code class="language-kotlin">inline fun &lt;reified T&gt; printType() {
+    println(T::class.qualifiedName)
+}</code></pre>
+<p>In the above example, the <code class="language-kotlin">printType()</code> function is marked as inline and has a type parameter <code class="language-kotlin">T</code>, which is marked as <code class="language-kotlin">reified</code>. The function prints the qualified name of the class represented by the <code class="language-kotlin">reified</code> type parameter. The main benefit of using reified type parameters in inline functions is that it allows for more flexible and powerful type checking and casting at runtime. This can be particularly useful in cases where the type information of generic type parameters is needed at runtime. Additionally, reified type parameters can help reduce the amount of boilerplate code needed in certain situations, making the code more concise and easier to read.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p>Inline functions are a powerful tool in Kotlin that allows us to optimize the performance of higher-order functions. They are useful in scenarios where we want to avoid the overhead of function calls and improve the performance of the code. However, they also have some limitations, such as code duplication and restrictions on the use of recursive functions. Therefore, we should use them judiciously and only in scenarios where they provide a measurable benefit to the performance of the code. And also remember that reified type parameters are a powerful feature of Kotlin that can be used in conjunction with inline functions to provide additional type information at runtime. This can lead to more flexible and powerful type checking and casting at runtime, making code more concise and easier to read.</p>
+</div>

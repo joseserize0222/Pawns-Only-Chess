@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Type aliases can make your code more understandable.
+  - text: Type aliases allow you to use alternative short type names.
+  - text: Type aliases introduce new types.
+  - text: Type aliases can be used everywhere where the original type can be used.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/15353#comment
+status: Solved
+record: -1
+local_check: false

@@ -1,0 +1,92 @@
+<div class="step-text">
+<p>As you know, <strong>generics</strong> enable us to parameterize types when defining classes (or interfaces) and methods. Parameterized types make it possible to reuse the same code while processing different concrete types.</p>
+<h5 id="reusing-code-with-generics" style="text-align: center;">Reusing code with generics</h5>
+<p>Let's consider a <a class="theory-lookup not-relevant" href="/learn/step/15344" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a generic class is a class that is parameterized over a type, allowing you to create reusable and flexible code. | To declare a generic class, you specify the type parameter inside angle brackets after the class name. This type parameter can represent any type, and the class declaration does not depend on the specific type. This means that the same class can be used with different data types, making the code more abstract and reusable. The type parameter is determined when you create an instance of the class or invoke a method.">generic class</a> named <code class="language-kotlin">GenericType</code> that stores a value of "some type".</p>
+<pre><code class="language-kotlin">class GenericType&lt;T&gt;(val t: T) {
+    fun get(): T {
+        return t
+    }
+}</code></pre>
+<p>It is possible to create an object with a concrete type (e.g., <code class="language-kotlin">String</code>):</p>
+<pre><code class="language-kotlin">val stringInstance: GenericType&lt;String&gt; = GenericType&lt;String&gt;("abc")
+val stringField = stringInstance.get()</code></pre>
+<p>We can also create instances with other types (<code class="language-kotlin">Int</code>, <code class="language-kotlin">Char</code>) and then invoke the <code class="language-kotlin">get</code> method to access the internal field. In this manner, generics allow us to use the same class and methods for processing different types.</p>
+<h5 id="reusing-code-with-any" style="text-align: center;">Reusing code with Any</h5>
+<p>However, there is also another way to reuse code. If we declare a field of type <code class="language-kotlin">Any</code>, we can assign a value of any <a class="theory-lookup not-relevant" href="/learn/step/15344" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a reference type is a way to refer to a function or a constructor, allowing you to use it without invoking it immediately. | There are four types of function references in Kotlin: reference to a function, reference by class, reference by object, and reference to a constructor. Function references can be passed as an argument to other functions and invoked like a normal function. By using function references, Kotlin provides a smooth way for event handling, callback, and collection manipulation, leading to cleaner and more maintainable code.">reference type</a> to it.</p>
+<p>The following class demonstrates this concept:</p>
+<pre><code class="language-kotlin">class NonGenericClass(val value: Any) {    
+    fun get(): Any {
+        return value
+    }
+}</code></pre>
+<p>Now we can create an instance of this class with the same string as in the previous example (see <code class="language-kotlin">GenericType</code>).</p>
+<pre><code class="language-kotlin">val anyInstance: NonGenericClass = NonGenericClass("abc")</code></pre>
+<p>It is also possible to create an <a class="theory-lookup not-relevant" href="/learn/step/15344" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, an instance refers to an object or an instance of a class that is created during runtime. | It is a subtype of every known type in Kotlin, meaning it can represent a value of any type in terms of type checking. This is particularly useful in situations where a function demands a return type, but it is impossible to return a value, such as when calculating a percentage if the value is zero. In such cases, a function that returns `Instance` can be used. The concept of instance is also related to threading, where only one thread can execute code in a synchronized method of a particular instance. This means that different threads can execute methods of different objects at the same time, a concept that can be summarized as one thread per instance.">instance</a> by passing in a value of type <code class="language-kotlin">Int</code>, <code class="language-kotlin">Char</code>, or any other reference type.</p>
+<p>Using the <code class="language-kotlin">Any</code> class this way allows us to reuse the same class to store different <a class="theory-lookup not-relevant" href="/learn/step/15344" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a data type is a classification that specifies the kind of value that a variable, expression, or function parameter can hold. | It is an essential aspect of a statically-typed language like Kotlin, which requires explicit or implicit type declarations for variables and function parameters. For instance, Kotlin has various data types, such as integers, floating-point numbers, characters, booleans, and strings. Among these, strings are a widely-used data type that represents a sequence of zero or more characters enclosed by double quotes. Strings are often used in conditional statements and regular expressions, and they have various operations, such as getting the length or concatenating two strings. Moreover, type inference is a helpful feature in Kotlin that allows the compiler to deduce the data type of a variable, expression, or function parameter automatically, making the code more concise and readable.">data types</a>.</p>
+<h5 id="the-advantage-of-generics-from-run-time-to-compile-time" style="text-align: center;">The advantage of generics: from run-time to compile-time</h5>
+<p>After an invocation of the <code class="language-kotlin">get()</code> method, we obtain an <code class="language-kotlin">Any</code>, not a <code class="language-kotlin">String</code> or an <code class="language-kotlin">Integer</code>. We cannot get a string directly from the method.</p>
+<pre><code class="language-kotlin">val nonGenericInstance: NonGenericClass = NonGenericClass("abc")
+val str: String = nonGenericInstance.get() // Compile-time error: Type mismatch</code></pre>
+<p>To get the string back, we must perform an explicit type-cast to the <code class="language-kotlin">String</code> class.</p>
+<pre><code class="language-kotlin">val str: String = nonGenericInstance.get() as String // "abc"</code></pre>
+<p>This works because a string was passed into <code class="language-kotlin">nonGenericInstance</code>. But what if the instance does not store a string? If this is the case, the code throws an exception. Here is an example:</p>
+<pre><code class="language-kotlin">val instance: NonGenericClass = NonGenericClass(123)
+val string: String = instance.get() as String // throws java.lang.ClassCastException</code></pre>
+<p>Now we can see the main advantage of generics over the <code class="language-kotlin">Any</code> class. Because there is no need to perform an explicit type-cast, we never get a runtime exception. If we do something wrong, we can see it at compile-time.</p>
+<pre><code class="language-kotlin">val stringInstance: GenericType&lt;String&gt; = GenericType&lt;String&gt;("abc")
+        
+val str: String = stringInstance.get() // There is no type-casting here
+val num: Int = stringInstance.get() // It does not compile</code></pre>
+<p>A compile-time error will be detected by the programmer, not a user of the program. Because generics let the compiler take care of type casting, generics are both safer and more flexible compared with the <code class="language-kotlin">Any</code> class. </p>
+<h5 id="multiple-type-parameters" style="text-align: center;">Multiple Type Parameters</h5>
+<p>In many situations, it is much more convenient to have several parameters in a class, which can be of arbitrary type. Kotlin allows us to define not only one parameter of arbitrary type but also two, three, etc. In this case, you can specify several type parameters, separating them with a comma.</p>
+<pre><code class="language-kotlin">class MultipleGenerics&lt;T, P&gt;(var valueT: T, var valueP: P)</code></pre>
+<p>This way is much better and safer than declaring all parameters as type <code class="language-kotlin">Any</code>. Let's see an example to understand the differences between these two methods of declaring parameterizing classes:</p>
+<p>We have two classes: a generic class <code class="language-kotlin">PairGeneric</code> and a non-generic class <code class="language-kotlin">PairNonGeneric</code>. Both of them have two fields of arbitrary type <code class="language-kotlin">first</code> and <code class="language-kotlin">second</code>:</p>
+<pre><code class="language-kotlin">class PairGeneric&lt;T, P&gt;(var first: T, var second: P) {
+    fun changeFirst(newValue: T) {
+        first = newValue
+    }
+
+    fun changeSecond(newValue: P) {
+        second = newValue
+    }
+    fun printData() {
+        println("Value:")
+        println("first = $first")
+        println("second = $second")
+    }
+}
+
+class PairNonGeneric(var first: Any, var second: Any) {
+    fun changeFirst(newValue: Any) {
+        first = newValue
+    }
+
+    fun changeSecond(newValue: Any) {
+        second = newValue
+    }
+    fun printData() {
+        println("Value:")
+        println("first = $first")
+        println("second = $second")
+    }
+}</code></pre>
+<p>Now, let's do some wrong actions with the <a class="theory-lookup not-relevant" href="/learn/step/15344" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a class field is a variable or property declared inside a class that stores a value. | Fields can be of various types, such as numbers, strings, or other objects, and they can be accessed and modified within the class they are declared in. The visibility of fields can be controlled using access modifiers such as `private`, `protected`, or `public`. To allow access to a private field from outside the class, getter and setter methods can be used. Fields can also be initialized through a constructor and can have visibility modifiers specified for them.">class fields</a> and see the difference:</p>
+<pre><code class="language-kotlin">fun main() {
+    val genericPair: PairGeneric&lt;String, Int&gt; = PairGeneric("John", 8)
+    val nonGenericPair: PairNonGeneric = PairNonGeneric("Kate", 18)
+
+    genericPair.changeFirst(8) // It does not compile
+    nonGenericPair.changeSecond("Smith") // It works
+
+    nonGenericPair.printData()
+}</code></pre>
+<p>Here is the result for the object of <code class="language-kotlin">PairNonGeneric</code> class:</p>
+<pre><code class="language-no-highlight">Value:
+first = Kate
+second = Smith</code></pre>
+<p>As you can see, if the field type in the class is Any, you can easily and with no errors assign values of different types to the field, which is not good. When you write small programs, this might not be a problem for you, as you will remember what field type you defined. But when you go to code large programs and applications, this can lead to errors that are very hard to find. In this case, it is best to use generics: if you try to assign a value with a different type to a field, it won't compile and you will easily find the problem</p>
+<h5 id="conclusion" style="text-align: center;">Conclusion</h5>
+<p>Both generics and Any allow you to write generalized code. Using <code class="language-kotlin">Any</code>, however, may require explicit type-casting, which can lead to error-prone code. Generics provide type-safety by shifting type checking responsibilities to the Kotlin compiler.</p>
+</div>

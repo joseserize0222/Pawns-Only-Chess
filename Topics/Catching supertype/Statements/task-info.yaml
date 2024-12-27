@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: "If all specific exceptions are handled, there's no need to catch the supertype\
+    \ Exception."
+  - text: The when expression enables handling multiple exceptions within a single catch
+      block.
+  - text: It's impossible to catch multiple exceptions in Kotlin.
+  - text: The sequence of catch blocks is crucial when handling multiple exceptions.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/31357#comment
+status: Solved
+record: -1
+local_check: false

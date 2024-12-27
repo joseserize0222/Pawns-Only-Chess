@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: To write code that works with any type of object
+  - text: To lock down code to work with only one object type
+  - text: To enforce stronger access control in classes
+  - text: To improve the runtime speed of applications
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/44494#comment
+status: Solved
+record: -1
+local_check: false

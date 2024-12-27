@@ -1,0 +1,23 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: |-
+      `15
+      16`
+  - text: |-
+      `16
+      15`
+  - text: |-
+      `15
+      15`
+  - text: |-
+      `16
+      16`
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/41017#comment
+status: Solved
+record: -1
+local_check: false

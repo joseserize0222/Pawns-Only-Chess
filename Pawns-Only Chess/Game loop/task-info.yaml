@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/chess/Main.kt
+    visible: true
+    learner_created: false
+  - name: test/PawnsOnlyChessTest.kt
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/13175#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 27 Dec 2024 19:39:57 UTC"
+record: 2

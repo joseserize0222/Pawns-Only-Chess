@@ -1,0 +1,53 @@
+<div class="step-text">
+<p>Currying is a great <a class="theory-lookup not-relevant" href="/learn/step/38718" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, functional programming is a style of programming that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. | It emphasizes immutability, pure functions, and higher-order functions. The Kotlin standard library provides many functions for collections, such as `filter`, `map`, and `reduce`, which are commonly used in functional programming. These functions allow you to process and transform data in a declarative way, without changing the original data.">functional programming</a> concept that you can use in Kotlin. This concept allows you to transform a function with multiple arguments into a sequence of functions, each with a single argument. This article will delve into the details of currying, providing a comprehensive understanding of its application, benefits, and real-world examples.</p>
+<h5 id="understanding">Understanding</h5>
+<p>In its essence, <strong>currying</strong> is a technique in functional programming where a function with multiple arguments is transformed into a sequence of functions, each with a single argument. In other words, it breaks down a function that takes multiple arguments into a series of functions that take one argument. Let's consider an example to understand the basic concept of currying:</p>
+<pre><code class="language-kotlin">fun  ((T1, T2) -&gt; R).curried() = 
+    fun(p1: T1) = fun(p2: T2) = this(p1, p2)</code></pre>
+<p>In this example, we have created a curried function. The function `curried()` takes a function with two parameters and returns a function that takes one parameter and returns another function that also takes one parameter. Instead of taking all its arguments at once, the function takes the first one and returns a new function that takes the second one.</p>
+<h5 id="applying">Applying</h5>
+<p>To understand how currying can be applied, consider a function that calculates the total price of items with a certain discount. This function takes two arguments: the original price and the discount rate.</p>
+<pre><code class="language-kotlin">fun calculateTotalPrice(price: Double, discount: Double): Double {
+    return price - (price * discount / 100)
+}</code></pre>
+<p>We can use the currying technique to transform this function into a series of functions, each taking one argument.</p>
+<pre><code class="language-kotlin">fun calculateTotalPrice(price: Double): (Double) -&gt; Double {
+    return { discount -&gt; price - (price * discount / 100) }
+}</code></pre>
+<p>Now, we can create a new function for a specific discount rate. This new function takes the original price as an argument and returns the discounted price.</p>
+<pre><code class="language-kotlin">val calculateWith30PercentOff = calculateTotalPrice(100.0)
+println(calculateWith30PercentOff(30.0))  // Output: 70.0</code></pre>
+<p>In this example, `calculateWith30PercentOff` is a new function created from the curried function `calculateTotalPrice`. It takes the original price as an argument and applies a 30 percent discount.</p>
+<h5 id="currying-in-action">Currying in action</h5>
+<p>Now let's look at a more complex example to understand how currying can be used in real-world applications. Suppose we are working on software for a delivery service, and we have a function that calculates the delivery cost based on the weight of the package, the distance to the destination, and the type of delivery (standard or express).</p>
+<pre><code class="language-kotlin">fun calculateDeliveryCost(weight: Double, distance: Double, type: String): Double {
+    val baseCost = if (type == "standard") 5.0 else 10.0
+    val weightCost = weight * 0.5
+    val distanceCost = distance * 0.3
+    return baseCost + weightCost + distanceCost
+}</code></pre>
+<p>This function works fine, but it can be improved using currying. We can curry this function so that we can create new functions for specific weights, distances, and delivery types.</p>
+<pre><code class="language-kotlin">fun calculateDeliveryCost(weight: Double): (Double) -&gt; (String) -&gt; Double {
+    return { distance -&gt; { type -&gt; 
+        val baseCost = if (type == "standard") 5.0 else 10.0
+        val weightCost = weight * 0.5
+        val distanceCost = distance * 0.3
+        baseCost + weightCost + distanceCost
+    }}
+}</code></pre>
+<p>Now, we can create new functions for specific weights and distances. For example, we can create a function for a package that weighs 10 kilograms and needs to be delivered 50 kilometers away.</p>
+<pre><code class="language-kotlin">val calculateFor10KgAnd50Km = calculateDeliveryCost(10.0)(50.0)
+println(calculateFor10KgAnd50Km("standard")) // Output: 35.0
+println(calculateFor10KgAnd50Km("express"))  // Output: 40.0</code></pre>
+<p>This way, we can create specific functions for different scenarios, making our code more modular and reusable.</p>
+<h5 id="deep-dive">Deep dive</h5>
+<p>Currying provides several advantages that can significantly enhance your Kotlin code:</p>
+<ul>
+<li><strong>Code Reusability</strong>: Currying allows you to create new functions from existing ones with some arguments pre-filled. This can help to increase code reusability. You can generate as many specific functions as you need from a general function, each tailored to a specific use case.</li>
+<li><strong>Delayed Computation</strong>: Currying allows you to delay computation. You can create a function with some arguments and execute it later with the remaining arguments. This is especially useful in scenarios where computations are expensive and you want to spread them over time.</li>
+<li><strong><a class="theory-lookup not-relevant" href="/learn/step/38718" rel="noopener noreferrer nofollow" target="_blank" title="In Kotlin, a higher-order function is a function that can take one or more functions as parameters or return a function as its result. | This feature allows for more modular, reusable, and maintainable code, as it promotes functional programming patterns and prevents issues with shared state in concurrent environments. Higher-order functions can be used to simplify complex situations and enhance code organization through functional decomposition. They are an essential part of Kotlin's support for functional programming, along with other features like lambda expressions, anonymous functions, and monads.">Higher-order Functions</a></strong>: Currying allows you to create higher-order functions. It enables you to pass functions as parameters and return them as results. Higher-order functions are a cornerstone of functional programming, and currying provides a straightforward way to create them.</li>
+<li><strong>Function Composition</strong>: Currying can facilitate function composition. In this technique, you combine simple functions to build more complex ones. With currying, you can easily compose functions that enhance readability and maintainability.</li>
+</ul>
+<h5 id="conclusion">Conclusion</h5>
+<p><strong>Currying</strong> is a great technique in functional programming that you can use in Kotlin. It allows you to transform a function with multiple arguments into a sequence of functions, each with a single argument. This can increase code reusability, enable delayed computation, facilitate function composition, and allow for the creation of higher-order functions. The main concept to remember is that a curried function returns a new function for each argument, allowing for flexible programming patterns. With a solid understanding of currying, you can write more modular, reusable, and maintainable Kotlin code.</p>
+</div>

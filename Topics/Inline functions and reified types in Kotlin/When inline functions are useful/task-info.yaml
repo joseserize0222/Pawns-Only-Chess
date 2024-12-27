@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: When a function is used as an argument for another function
+  - text: When a function is used frequently
+  - text: When we want to avoid code duplication
+  - text: When a function is large
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/26478#comment
+status: Solved
+record: -1
+local_check: false

@@ -1,0 +1,21 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: 5
+  - text: "null"
+  - text: Peter
+  - text: Exception
+  - text: Pablo
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/24876#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Wed, 30 Oct 2024 23:36:28 UTC"
+record: -1
+selected_options:
+  - 0
+local_check: false

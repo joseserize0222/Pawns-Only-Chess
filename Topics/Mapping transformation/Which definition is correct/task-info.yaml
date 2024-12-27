@@ -1,0 +1,18 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: Returns a list of collections and map each element of the final collection.
+  - text: Returns a collection of collections without nulls.
+  - text: Performs a transformation with a lambda on each element of a collections and
+      returns it as a set.
+  - text: Takes a function that maps the elements of one collection to another and returns
+      a list of all the values ​​in those elements.
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/23784#comment
+status: Solved
+record: -1
+custom_name: Which definition is correct?
+local_check: false

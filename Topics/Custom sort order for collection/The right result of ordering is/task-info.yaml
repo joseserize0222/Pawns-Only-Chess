@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: "[dimitry, emilio, michael, caroline, anne]"
+  - text: "[michael, emilio, dimitry, caroline, anne]"
+  - text: "[anne, caroline, dimitry, emilio, michael]"
+  - text: "[anne, caroline, michael, emilio, dimitry]"
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/22708#comment
+status: Solved
+record: -1
+local_check: false

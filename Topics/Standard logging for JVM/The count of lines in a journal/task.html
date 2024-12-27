@@ -1,0 +1,26 @@
+<div class="step-text">
+<p></p>
+<p>Please look at this code and write the number of <code class="language-kotlin">INFO</code> level log lines printed in the console.</p>
+<pre><code class="language-kotlin">import java.util.logging.*
+
+object Main {
+    @JvmStatic
+    fun main(args: Array&lt;String&gt;) {
+        val logger = Logger.getLogger(Main::class.java.name)
+        Printer.splitter().forEach {
+            if (it.length &lt; 5) {
+                logger.log(Level.INFO, it)
+            }
+        }
+    }
+}
+
+object Printer {
+
+    private const val text = "I like to study Kotlin. It is a simple programming language."
+
+    fun splitter(): List&lt;String&gt; {
+        return text.split(" ")
+    }
+}</code></pre>
+</div>

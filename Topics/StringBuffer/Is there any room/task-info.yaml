@@ -1,0 +1,16 @@
+type: code
+custom_name: Is there any room?
+files:
+  - name: src/Main.kt
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/30275#comment
+status: Solved
+feedback:
+  message: |-
+    <html>[+] Test #1. OK
+
+    1 of 1 test(s) passed.</html>
+  time: "Wed, 11 Sep 2024 20:17:23 UTC"
+record: -1
+submission_language: kotlin

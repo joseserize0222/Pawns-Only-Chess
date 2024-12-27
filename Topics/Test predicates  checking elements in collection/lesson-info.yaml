@@ -1,0 +1,8 @@
+custom_name: "Test predicates: checking elements in collection"
+content:
+  - Theory
+  - The secret is in the length
+  - The right result is true
+  - Which operations return true
+  - Which definition is correct
+  - A secret should always be a secret

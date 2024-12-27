@@ -1,0 +1,49 @@
+<div class="step-text">
+<p>Kotlin, as a statically typed programming language, offers great features that allow developers to write clean, maintainable, and expressive code. If you're already familiar with Domain Specific Languages (DSLs) and <a class="theory-lookup not-relevant" href="/learn/step/44490" target="_blank" title="In Kotlin, a type-safe builder is a feature that combines the builder design pattern and Domain Specific Language (DSL) to create APIs with a fluent and readable syntax. | Type-safe builders are defined through extension functions in a class or companion object, which extend a base type and allow for building and configuring objects safely at compile time. The Kotlin compiler can verify the correctness of the values and properties used in the building block, preventing common errors and providing a safer and more error-prone development experience. Type-safe builders are useful in enforcing scoping rules and providing better clarity about the intended usage of the DSL.">type-safe builders</a> in Kotlin, you're on the right track to understanding <a class="theory-lookup not-relevant" href="/learn/step/44490" target="_blank" title="In Kotlin, a generic builder is a type-safe builder implemented using the builder pattern, which allows for creating complex objects step by step in a more readable and maintainable way. | It provides a way to construct objects by separating the construction logic from the representation. Generic builders in Kotlin can be enhanced by using features such as extension functions, lambda with receivers, and DSL (Domain Specific Language) to create versatile and reusable code structures.">generic builders</a>. Don't worry if some concepts are new to you, we'll explain each term and show you how to use these advanced features to create versatile and reusable code structures.</p>
+<h5 id="understanding-generics-in-kotlin">Understanding generics in kotlin</h5>
+<p style="text-align: start">Generics are a fundamental concept in Kotlin that allow you to write flexible and reusable code. They enable you to define classes, interfaces, and methods that can operate on objects of various types while ensuring compile-time type safety. This means you can avoid class casts and the potential for runtime errors that can occur with incorrect casts.</p>
+<p style="text-align: start">Here's a quick example of a generic class in Kotlin:</p>
+<pre><code class="language-kotlin">
+class Box(t: T) {
+    var value = t
+}
+</code></pre>
+<p style="text-align: start">In this code snippet, <code class="language-kotlin">T</code> is a type parameter that can be replaced with any actual type when the class is used, making the <code class="language-kotlin">Box</code> class reusable for any object type.</p>
+<h5 id="what-are-generic-builders">What are generic builders?</h5>
+<p style="text-align: start">Generic builders are an advanced application of type-safe builders that incorporate generics. They allow the creation of builders that can construct objects of any given type, specified at the time of the builder's invocation. This is particularly useful when you want to create a builder that is not tied to a specific type and can be reused across different types.</p>
+<p style="text-align: start">For example, you might want to create a list of different types of objects using the same building process. By using a generic builder, you can define the construction logic once and apply it to any type you need.</p>
+<h5 id="implementing-generic-builders-in-kotlin">Implementing generic builders in kotlin</h5>
+<p style="text-align: start">Let's implement a generic builder in Kotlin. We'll create a simple builder for a list of items where the type of items is not predetermined. Our builder will use Kotlin's DSL features to provide a clean and intuitive way to add items to the list.</p>
+<pre><code class="language-kotlin">
+class GenericListBuilder {
+    private val items = mutableListOf()
+
+    fun item(item: T) {
+        items.add(item)
+    }
+
+    fun build(): List = items
+}
+
+fun  buildList(builderAction: GenericListBuilder.() -&gt; Unit): List {
+    val builder = GenericListBuilder()
+    builder.builderAction()
+    return builder.build()
+}
+
+val intList = buildList {
+    item(1)
+    item(2)
+    item(3)
+}
+val stringList = buildList {
+    item("one")
+    item("two")
+    item("three")
+}
+</code></pre>
+<p style="text-align: start">In this example, <code class="language-kotlin">GenericListBuilder</code> is a class with a type parameter <code class="language-kotlin">T</code>, representing the type of items in the list. The <code class="language-kotlin">item</code> method adds an element to the internal mutable list of type <code class="language-kotlin">T</code>. The <code class="language-kotlin">build</code> method returns an immutable list of the added items.</p>
+<p style="text-align: start">The <code class="language-kotlin">buildList</code> function is a higher-order function that takes a lambda with receiver, allowing us to use the <code class="language-kotlin">item</code> method inside the lambda to add elements to the list. We use this function to create lists of integers and strings, demonstrating the reusability of our generic builder.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p style="text-align: start">To recap, generics in Kotlin allow for type-safe operations on various object types, ensuring compile-time safety and reducing runtime errors. Generic builders utilize these generics to create flexible and reusable building processes. Through the use of Kotlin's DSL and lambda with receiver, we can implement intuitive and concise builders that work with any data type. With these tools, you can write more expressive and maintainable code that can be adapted to a wide range of programming needs.</p>
+</div>

@@ -1,0 +1,20 @@
+<div class="step-text">
+<p></p>
+<p>Neo is trying to hack the Matrix. He has one specific code that might be the key to his success. However, to decipher it, he needs to extract certain characters from this code following special instructions.</p>
+<p><strong>Instructions:</strong></p>
+<ol>
+<li>
+<p>Iterate through each character of the code using its index. For this, you can get all indexes <code class="java">.indices</code>;</p>
+</li>
+<li>
+<p>For each character:</p>
+<ul>
+<li>If the character's index in the string is even (0-based indexing), extract the first character from the code and use <code class="java">.removeFirst()</code> for this;</li>
+<li>If the character's index in the string is odd, extract the last character from the code use <code class="java">.removeLast()</code> for this.</li>
+</ul>
+</li>
+<li>
+<p>Print the series of extracted characters as the result.</p>
+</li>
+</ol><br><b>Sample Input:</b><br><pre><code class="language-no-highlight">1 2 3 8 10 10<br></code></pre><br><b>Sample Output:</b><br><pre><code class="language-no-highlight">1 10 2 10 3 8<br></code></pre><br><br><br><font color="gray">Memory limit: 256 MB</font><br><font color="gray">Time limit: 8 seconds</font><br><br>
+</div>
